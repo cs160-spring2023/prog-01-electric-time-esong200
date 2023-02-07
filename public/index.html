@@ -9,7 +9,7 @@
 <!-- you can also specify styles straight in html! Let's use Verdana on this page.-->
 <body style="font-family:Verdana;">
 <div style="background-color:#e5e5e5;padding:15px;text-align:center;">
-  <h1>Hello World</h1>
+  <h1>Electric Time</h1>
 </div>
 
 <div style="overflow:auto">
@@ -20,8 +20,62 @@
   </div>
 
   <div class="main">
+    <script>
+      const walking = [3.1, 30]
+      const boostedMini = [18, 7]
+
+      var transportTypes = {
+        "Walking": walking,
+        "Boosted Mini S Board": boostedMini
+      } 
+      function buttonClicked() {
+        //alert("lol")
+        console.log(transportTypes["Walking"])
+        var img = document.getElementById('jumpinjoe');
+        var transportTypeTextField = document.getElementById('transportType')
+        var desiredDistanceTextField = document.getElementById('desiredDistance')
+        var calculateButton = document.getElementById('calculateButton');
+        var outputLabel = document.getElementById('output')
+        
+        var transportType = transportTypeTextField.value
+        transportTypeTextField.value = ""
+        console.log("Type: " + transportType)
+        var desiredDistance = desiredDistanceTextField.value
+        console.log("Distance: " + desiredDistance)
+        desiredDistanceTextField.value = ""
+        var isIn = transportType in transportTypes
+        console.log("In dict?: " + isIn)
+
+        if (transportType in transportTypes){
+          outputLabel.innerHTML = desiredDistance / transportTypes[transportType][0]
+        } else {
+          outputLabel.innerHTML = "Error. Transportation type not recognized."
+        }
+
+        // if (img.style.visibility == 'hidden') { //if its already hidden
+        //     img.style.visibility = 'visible'; //bring it back
+        //     butt.value = "HIDE THE BUNNY"
+        // } 
+        // else { //otherwise its visible
+        //     img.style.visibility = 'hidden'; //so make it hidden!
+        //     butt.value = "wait no bring him back"
+        // }
+      }
+    </script>
     <h2>Why are these colors so ugly?</h2>
     <p>Sure makes you feel motivated to pick a better color-scheme for yourself instead of sticking with these ugly default colors, huh? >:)</p>
+    <img src="https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/51417610/1/?bust=1624561987" width="300" alt="bunny" id="jumpinjoe">
+    <p><h3>Enter Transportation Type and Distance You Would Like to Travel</h3></p>
+    <p>
+      <label for="transportType">Enter Transport Type:</label>
+      <input type="text" id="transportType" name="transportType">
+    </p>
+    <p>
+      <label for="desiredDistance">Enter Desired Distance to Travel (in miles):</label>
+      <input type="text" id="desiredDistance" name="desiredDistance">
+    </p>
+    <p><input type="button" id='calculateButton' value="Calculate Time"  onclick = "buttonClicked()"></p>
+    <p> Estimated Travel Time: <label id = "output">0</label></p>
   </div>
 
   <div class="right">
