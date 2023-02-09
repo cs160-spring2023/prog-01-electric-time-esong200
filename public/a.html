@@ -3,32 +3,117 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- let's link to our stylesheet (found in public/css/styles.css)-->
-<link rel="stylesheet" type="text/css" href="/css/styles.css"> 
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 
-<!-- you can also specify styles straight in html!-->
-<!-- let's make this page use comic sans and dark blue for the body text. -->
-<body style="font-family:'Comic Sans MS', 'Comic Sans', cursive; color:#0000aa;">
-
+<!-- you can also specify styles straight in html! Let's use Verdana on this page.-->
+<body style="font-family:Verdana;">
 <div style="background-color:#e5e5e5;padding:15px;text-align:center;">
   <h1>Electric Time</h1>
 </div>
 
-
 <div style="overflow:auto">
   <div class="menu">
-    <a href="/">Back to Calculator</a>
-
+    <a href="/">Home</a>
   </div>
 
   <div class="main">
+    <script>
+      var transportTypes = {
+        "Walking": [3.1, 30],
+        "Boosted Mini S Board": [18, 7],
+        "Evolve Bamboo GTR 2in1": [24, 31],
+        "Segway Ninebot S-PLUS": [12, 22],
+        "Hovertrax Hoverboard": [9, 6],
+        "OneWheel XR": [19, 18],
+        "MotoTec Skateboard": [22, 10],
+        "Segway Ninebot S": [12, 22],
+        "Razor Scooter": [18, 15],
+        "GeoBlade 500": [9,6]
+      } 
 
-    <h2>Check out this cool rabbit!</h2>
-    <img src="/images/bunny.jpg" alt="a rabbit" class="responsive center">
-        <p>Photo credits: 
-      <a href="https://unsplash.com/photos/u_kMWN-BWyU">Satyabratasm on Unsplash </a>
-   </p>
+      function buttonClicked() {
+        var desiredDistanceTextField = document.getElementById('desiredDistance')
+        var transportTypeList = document.getElementById("transportTypeList");  
+
+        var calculateButton = document.getElementById('calculateButton');
+        var outputLabel1 = document.getElementById('output1')
+        var outputLabel2 = document.getElementById('output2')
+
+        
+        var transportType1 = transportTypeList1.options[transportTypeList1.selectedIndex].text
+        var transportType2 = transportTypeList2.options[transportTypeList2.selectedIndex].text
+
+        var desiredDistance = desiredDistanceTextField.value
+        desiredDistanceTextField.value = ""
+        console.log(transportType1 + " " + transportType2)
+
+        if (desiredDistance > transportTypes[transportType1][1] || desiredDistance > transportTypes[transportType2][1]) {
+          if (desiredDistance > transportTypes[transportType1][1]) {
+            outputLabel1.innerHTML = "Error. Desired distance via " + transportType1 + " greater than maximum range."
+          } if (desiredDistance > transportTypes[transportType2][1]) {
+            outputLabel2.innerHTML = "Error. Desired distance via " + transportType2 + " greater than maximum range."
+          }
+          return
+        }
+
+        time1 = desiredDistance  / transportTypes[transportType1][0]
+        time2 = desiredDistance  / transportTypes[transportType2][0]
+
+        outputLabel1.innerHTML = Math.floor(time1)
+        + " Hours "
+        + Math.round((time1 - Math.floor(time1))*60*100)/100
+        + " Minutes"
+        + " via " + transportType1
+
+        outputLabel2.innerHTML = Math.floor(time2)
+        + " Hours "
+        + Math.round((time2 - Math.floor(time2))*60*100)/100
+        + " Minutes"
+        + " via " + transportType2
+      }
+    </script>
+    <p><h3>Compare Travel Times For Different Transportation Methods</h3></p>
+    <p>
+      <label for="transportTypeList1">Choose The First Transportation Type:</label>
+      <select name="transportTypeList1" id="transportTypeList1">
+        <option value="Walking">Walking</option>
+        <option value="Boosted Mini S Board">Boosted Mini S Board</option>
+        <option value="Evolve Bamboo GTR 2in1">Evolve Bamboo GTR 2in1</option>
+        <option value="Segway Ninebot S-PLUS">Segway Ninebot S-PLUS</option>
+        <option value="Hovertrax Hoverboard">Hovertrax Hoverboard</option>
+        <option value="OneWheel XR">OneWheel XR</option>
+        <option value="MotoTec Skateboard">MotoTec Skateboard</option>
+        <option value="Segway Ninebot S">Segway Ninebot S</option>
+        <option value="Razor Scooter">Razor Scooter</option>
+        <option value="GeoBlade 500">GeoBlade 500</option>
+      </select>
+    </p>
+    <p>
+      <label for="transportTypeList2">Choose The Second Transportation Type:</label>
+      <select name="transportTypeList2" id="transportTypeList2">
+        <option value="Walking">Walking</option>
+        <option value="Boosted Mini S Board">Boosted Mini S Board</option>
+        <option value="Evolve Bamboo GTR 2in1">Evolve Bamboo GTR 2in1</option>
+        <option value="Segway Ninebot S-PLUS">Segway Ninebot S-PLUS</option>
+        <option value="Hovertrax Hoverboard">Hovertrax Hoverboard</option>
+        <option value="OneWheel XR">OneWheel XR</option>
+        <option value="MotoTec Skateboard">MotoTec Skateboard</option>
+        <option value="Segway Ninebot S">Segway Ninebot S</option>
+        <option value="Razor Scooter">Razor Scooter</option>
+        <option value="GeoBlade 500">GeoBlade 500</option>
+      </select>
+    </p>
+    <p>
+      <label for="desiredDistance">Enter Desired Distance to Travel (in miles):</label>
+      <input type="text" id="desiredDistance" name="desiredDistance">
+    </p>
+    <p><button type="button" class="btn btn-light" value="Calculate Time" id='calculateButton' onclick="buttonClicked()">Calculate</button></p>
+    <p> Estimated Travel Time:
+      <p> <label id = "output1">0 hours</label></p>
+      <p> <label id = "output2"> 0 hours</label></p>
+    </p>
   </div>
 
   <div class="right">
@@ -36,6 +121,7 @@
     <p>An application that calculates travel time based on transportation mode and distance.</p>
   </div>
 </div>
+
 
 </body>
 </html>

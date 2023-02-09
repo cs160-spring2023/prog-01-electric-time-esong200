@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 
@@ -62,7 +63,6 @@
         }
       }
     </script>
-    
     <p><h3>Enter Transportation Type and Distance You Would Like to Travel</h3></p>
     <p>
       <label for="transportTypeList">Choose a Transportation Type:</label>
@@ -83,7 +83,7 @@
       <label for="desiredDistance">Enter Desired Distance to Travel (in miles):</label>
       <input type="text" id="desiredDistance" name="desiredDistance">
     </p>
-    <p><input type="button" id='calculateButton' value="Calculate Time"  onclick = "buttonClicked()"></p>
+    <p><button type="button" class="btn btn-light" value="Calculate Time" id='calculateButton' onclick="buttonClicked()">Calculate</button></p>
     <p> Estimated Travel Time: <label id = "output">0</label></p>
   </div>
 
